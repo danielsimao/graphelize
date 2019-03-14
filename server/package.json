@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apollo-boost": "^0.3.1",
+    "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.4.8",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "mysql2": "^1.6.5",
+    "pg": "^7.8.2",
+    "sequelize": "^5.1.0"
+  }
+}
