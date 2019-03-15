@@ -1,13 +1,13 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 const db = require("./models");
-// const Mutation = require("./src/resolvers/Mutation");
+const Mutation = require("./src/resolvers/Mutation");
 const Query = require("./src/resolvers/Query");
 // const Subscription = require("./src/resolvers/Subscription");
 const { makeExecutableSchema } = require("graphql-tools");
 const { importSchema } = require("graphql-import");
 
-const resolvers = { Query };
+const resolvers = { Query, Mutation };
 const typeDefs = importSchema("src/schema.graphql");
 
 const server = new ApolloServer({

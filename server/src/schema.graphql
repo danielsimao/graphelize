@@ -27,8 +27,8 @@ type Query {
   users: [User!]!
 }
 
-# type Mutation {
-#   createRepo(name: String!, url: String!, balance: Int!, userId: ID!): Repo!
-#   updateRepo(id: ID!, name: String!, url: String!, balance: Int!): [Int!]!
-#   deleteRepo(id: ID!): Int!
-# }
+type Mutation {
+  createRepo(name: String!, url: String!, balance: Int!, userId: ID!): Repo!
+  updateRepo(id: ID!, name: String!, url: String!, balance: Int!): [Int!]!
+  deleteRepo(id: ID!): Int!
+}
