@@ -5,10 +5,10 @@ function users(parent, args, { db }, info) {
   return db.user.findAll();
 }
 function repo(parent, { id }, { db }, info) {
-  db.repo.findById(id);
+  return db.repo.findOne({ where: { id } });
 }
 function user(parent, { id }, { db }, info) {
-  db.user.findById(id);
+  return db.user.findOne({ where: { id } });
 }
 
 module.exports = { repos, users, repo, user };
