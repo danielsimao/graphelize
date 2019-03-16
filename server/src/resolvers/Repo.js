@@ -1,3 +1,5 @@
-owner = (parent, args, context, info) => parent.getOwner();
+function user(parent, args, context, info) {
+  return parent.getUser();
+}
 
-module.exports = { owner };
+module.exports = { user };

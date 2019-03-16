@@ -17,7 +17,7 @@ type Repo {
   url: String!
   balance: Int!
   userId: ID!
-  owner: User!
+  user: User!
 }
 
 type Query {

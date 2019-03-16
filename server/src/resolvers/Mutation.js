@@ -1,3 +1,5 @@
+//TODO type input schemas
+
 function createRepo(parent, { name, url, balance, userId }, { db }, info) {
   const repo = db.repo.create({
     name,

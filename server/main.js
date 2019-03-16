@@ -9,7 +9,7 @@ const User = require("./src/resolvers/User");
 const { makeExecutableSchema } = require("graphql-tools");
 const { importSchema } = require("graphql-import");
 
-const resolvers = { Query, Mutation, Repo, User };
+const resolvers = { Repo, User, Query, Mutation };
 const typeDefs = importSchema("src/schema.graphql");
 
 //TODO Authentication. CRUD to Repo only with user token
