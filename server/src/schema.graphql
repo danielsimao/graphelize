@@ -1,5 +1,10 @@
 scalar timestamp
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 type User {
   id: ID!
   username: String!
@@ -31,4 +36,20 @@ type Mutation {
   createRepo(name: String!, url: String!, balance: Int!, userId: ID!): Repo!
   updateRepo(id: ID!, name: String!, url: String!, balance: Int!): [Int!]!
   deleteRepo(id: ID!): Int!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  createUser(
+    username: String!
+    fullname: String!
+    email: String!
+    password: String!
+  ): User!
+  updateUser(
+    id: ID!
+    username: String!
+    fullname: String!
+    email: String!
+    password: String!
+  ): [Int!]!
+  deleteUser(id: ID!): Int!
 }
