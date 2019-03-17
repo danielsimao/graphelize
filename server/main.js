@@ -15,7 +15,13 @@ const typeDefs = importSchema("src/schema.graphql");
 //TODO Authentication. CRUD to Repo only with user token
 const server = new ApolloServer({
   schema: makeExecutableSchema({ typeDefs, resolvers }),
-  context: { db }
+  formatError: error => {
+    console.log(error);
+    return error;
+  },
+  context: req => {
+    return { ...req, db };
+  }
 });
 
 const app = express();
@@ -24,4 +30,3 @@ server.applyMiddleware({ app });
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 );
-// });

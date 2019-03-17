@@ -1,53 +1,43 @@
 //TODO type input schemas
-//TODO login and signup
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { APP_SECRET, getUserId } = require("../../utils/jwt");
 
-// async function signup(parent, {password}, {db}, info) {
-//   const password = await bcrypt.hash(password, 10);
-
-//   const user = await db.user.createUser({ ...args, password });
-
-//   const token = jwt.sign({ userId: user.id }, APP_SECRET);
-
-//   return {
-//     token,
-//     user
-//   };
-// }
-
-// async function login(parent, { username }, { db }, info) {
-//   const user = await db.user({ username });
-//   if (!user) {
-//     throw new Error("No such user found");
-//   }
-
-//   const valid = await bcrypt.compare(args.password, user.password);
-//   if (!valid) {
-//     throw new Error("Invalid password");
-//   }
-
-//   const token = jwt.sign({ userId: user.id }, APP_SECRET);
-
-//   return {
-//     token,
-//     user
-//   };
-// }
-
-function createUser(
-  parent,
-  { username, fullname, email, password },
-  { db },
-  info
-) {
-  const user = db.user.create({
-    username,
-    fullname,
-    email,
+async function signup(parent, args, { db }, info) {
+  const password = await bcrypt.hash(args.password, 10);
+  console.log(password);
+  const user = await db.user.create({
+    ...args,
     password
   });
 
-  return user;
+  const token = jwt.sign({ userId: user.id }, APP_SECRET);
+
+  return {
+    token,
+    user
+  };
 }
+
+async function login(parent, { username, password }, { db }, info) {
+  const user = await db.user.findOne({ where: { username } });
+  if (!user) {
+    throw new Error("No such user found");
+  }
+
+  const valid = await bcrypt.compare(password, user.password);
+  if (!valid) {
+    throw new Error("Invalid password");
+  }
+
+  const token = jwt.sign({ userId: user.id }, APP_SECRET);
+
+  return {
+    token,
+    user
+  };
+}
+
 function updateUser(
   parent,
   { username, fullname, email, password, id },
@@ -80,7 +70,10 @@ function deleteUser(parent, { id }, { db }, info) {
   return user;
 }
 
-function createRepo(parent, { name, url, balance, userId }, { db }, info) {
+function createRepo(parent, { name, url, balance }, context, info) {
+  const userId = getUserId(context);
+  const { db } = context;
+  console.log(userId);
   const repo = db.repo.create({
     name,
     url,
@@ -117,9 +110,8 @@ function deleteRepo(parent, { id }, { db }, info) {
 }
 
 module.exports = {
-  // signup,
-  // login,
-  createUser,
+  signup,
+  login,
   updateUser,
   deleteUser,
   createRepo,

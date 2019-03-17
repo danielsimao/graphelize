@@ -33,17 +33,16 @@ type Query {
 }
 
 type Mutation {
-  createRepo(name: String!, url: String!, balance: Int!, userId: ID!): Repo!
+  createRepo(name: String!, url: String!, balance: Int!): Repo!
   updateRepo(id: ID!, name: String!, url: String!, balance: Int!): [Int!]!
   deleteRepo(id: ID!): Int!
-  signup(email: String!, password: String!, name: String!): AuthPayload
-  login(email: String!, password: String!): AuthPayload
-  createUser(
+  signup(
     username: String!
     fullname: String!
     email: String!
     password: String!
-  ): User!
+  ): AuthPayload
+  login(username: String!, password: String!): AuthPayload
   updateUser(
     id: ID!
     username: String!
