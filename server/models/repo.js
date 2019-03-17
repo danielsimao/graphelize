@@ -1,19 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
-  const Repo = sequelize.define("repo", {
+  const Repo = sequelize.define('repo', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     url: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
-    balance: DataTypes.INTEGER
+    balance: DataTypes.INTEGER,
   });
 
   Repo.associate = models => {
